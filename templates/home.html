@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
 {% for post in post_list %}
 <div class="post-entry">
   <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
   <p>{{ post.body }}</p>
 </div>
 {% endfor %}
+{% else %}
+<p>Log in to see posts</p>
+{% endif %}
 {% endblock content %}

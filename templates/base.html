@@ -3,19 +3,32 @@
 
 <head>
   <title>Django blog</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet" s>
 </head>
 
 <body>
-  <header>
-    <div class="nav-left">
-      <h1><a href="{% url 'home' %}">Django blog</a></h1>
-    </div>
-    <div class="nav-right">
-      <a href="{% url 'post_new' %}">New Blog Post</a>
-    </div>
-  </header>
-  <div>{% block content %} {% endblock content %}</div>
+  <div>
+    <header>
+      <div class="nav-left">
+        <h1><a href="{% url 'home' %}">Django blog</a></h1>
+      </div>
+      <div class="nav-right">
+        Hey there
+      </div>
+    </header>
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}!</p>
+
+    <a href="{% url 'post_new' %}">New Blog Post</a>
+    <p><a href="{% url 'logout' %}">Log out</a></p>
+    {% else %}
+    <a href="{% url 'login' %}">Log In</a>
+    <p>You are not logged in.</p>
+    {% endif %}
+    {% block content %}
+    {% endblock content %}
+  </div>
 </body>
 
 </html>
